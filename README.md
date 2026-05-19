@@ -581,4 +581,4 @@ Use fresh dev database or reset schema
 
 # 👨‍💻 Author
 
-Built using Django REST Framework + Supabase PostgreSQL 🚀
+Hitesh Kumar S
