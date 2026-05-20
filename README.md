@@ -1,4 +1,4 @@
-# 🚀 Task Manager Backend
+# 🚀 Task Manager Application
 
 A production-ready **Django REST Framework backend** for a modern **Task Manager SaaS application** using:
 
