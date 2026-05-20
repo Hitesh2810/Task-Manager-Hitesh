@@ -1,123 +1,54 @@
+# 🚀 Task Manager Application
 
+A production-ready **full-stack Task Manager SaaS application** built using modern technologies with secure authentication, workspace collaboration, advanced task management, notifications, and a stunning Next.js frontend UI.
 
-A production-ready **Django REST Framework backend** for a modern **Task Manager SaaS application** using:
+---
 
-- 🐍 Django + DRF
-- 🐘 Supabase PostgreSQL
+# ✨ Tech Stack
+
+## 🔹 Backend
+- 🐍 Django
+- ⚡ Django REST Framework (DRF)
 - 🔐 JWT Authentication
+- 🐘 PostgreSQL
+- ☁️ Supabase PostgreSQL
 - 📧 OTP Email Verification
-- 🏢 Workspaces
-- ✅ Tasks & Checklists
-- 🔔 Notifications
-- 📎 Attachments
-- 📝 Notes & Comments
-- 🔍 Filtering/Search/Ordering
-- 📄 Pagination
+- 🔄 SimpleJWT
+- 🔍 DRF Filters
 - 🛠 Django Admin
 
 ---
 
-# ✨ Features
-
-## 🔐 Authentication System
-
-- ✅ User Registration
-- ✅ Email OTP Verification
-- ✅ JWT Login
-- ✅ Access & Refresh Tokens
-- ✅ Password Reset
-- ✅ Change Password
-- ✅ Logout
-- ✅ Protected APIs
-- ✅ User Profiles
-- ✅ Token Blacklisting
+## 🔹 Frontend
+- ⚡ Next.js
+- ⚛️ React.js
+- 🎨 Tailwind CSS
+- ✨ Framer Motion
+- 📡 Axios
+- 🧩 React Hook Form
+- 🔔 Toast Notifications
+- 🌙 Dark Mode
+- 📊 Dashboard Analytics
 
 ---
 
-## 🏢 Workspace System
-
-- ✅ Create Workspace
-- ✅ Invite Members
-- ✅ Member Roles
-- ✅ Archive Workspace
-- ✅ Workspace Permissions
-- ✅ Search & Filters
-
----
-
-## ✅ Task Management
-
-- ✅ Create Tasks
-- ✅ Assign Tasks
-- ✅ Task Priorities
-- ✅ Task Status Tracking
-- ✅ Due Dates & Reminders
-- ✅ Recurring Tasks
-- ✅ Task Notes
-- ✅ Task Comments
-- ✅ Checklist Items
-- ✅ Attachments
-- ✅ Archive/Restore Tasks
-
----
-
-## 🔔 Notifications
-
-- ✅ Task Assigned
-- ✅ Comment Notifications
-- ✅ Reminder Notifications
-- ✅ Mark Read / Unread
-- ✅ Unread Count
-
----
-
-# 🏗 Project Architecture
+# 🏗 Project Structure
 
 ```text
-Task Manager Backend/
+Task-Manager/
 │
 ├── backend/
 │   │
 │   ├── accounts/
-│   │   ├── authentication
-│   │   ├── JWT auth
-│   │   ├── OTP verification
-│   │   ├── profile management
-│   │   └── user management
-│   │
 │   ├── tasks/
-│   │   ├── task CRUD
-│   │   ├── checklist system
-│   │   ├── comments
-│   │   ├── notes
-│   │   ├── labels
-│   │   ├── attachments
-│   │   └── reminders
-│   │
 │   ├── workspaces/
-│   │   ├── workspace CRUD
-│   │   ├── workspace members
-│   │   ├── roles & permissions
-│   │   └── collaboration
-│   │
 │   ├── notifications/
-│   │   ├── alerts
-│   │   ├── reminders
-│   │   ├── unread tracking
-│   │   └── notification management
-│   │
 │   ├── config/
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   ├── wsgi.py
-│   │   └── asgi.py
-│   │
 │   ├── media/
 │   ├── staticfiles/
 │   ├── venv/
 │   ├── manage.py
 │   ├── requirements.txt
-│   ├── db.sqlite3
 │   └── .env
 │
 ├── frontend/
@@ -130,7 +61,6 @@ Task Manager Backend/
 │   ├── utils/
 │   ├── styles/
 │   ├── public/
-│   ├── middleware/
 │   ├── admin/
 │   ├── dashboard/
 │   ├── tasks/
@@ -139,7 +69,6 @@ Task Manager Backend/
 │   ├── login/
 │   ├── signup/
 │   ├── package.json
-│   ├── next.config.js
 │   └── .env.local
 │
 ├── README.md
@@ -147,590 +76,98 @@ Task Manager Backend/
 ```
 
 ---
-# 🗄 Database Structure
 
-# 👤 accounts_user
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| username | VARCHAR |
-| email | VARCHAR |
-| password | VARCHAR |
-| full_name | VARCHAR |
-| phone | VARCHAR |
-| profile_image | IMAGE |
-| bio | TEXT |
-| role | VARCHAR |
-| is_verified | BOOLEAN |
-| otp | VARCHAR |
-| otp_created_at | DATETIME |
-| created_at | DATETIME |
-| updated_at | DATETIME |
-
----
-
-# 🏢 workspaces_workspace
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| owner | FK → User |
-| name | VARCHAR |
-| slug | VARCHAR |
-| description | TEXT |
-| color | VARCHAR |
-| is_active | BOOLEAN |
-| is_archived | BOOLEAN |
-| created_at | DATETIME |
-| updated_at | DATETIME |
-
----
-
-# 👥 workspaces_workspacemember
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| workspace | FK |
-| user | FK |
-| role | VARCHAR |
-| joined_at | DATETIME |
-
----
-
-# ✅ tasks_task
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| workspace | FK |
-| created_by | FK |
-| assigned_to | FK |
-| title | VARCHAR |
-| description | TEXT |
-| status | VARCHAR |
-| priority | VARCHAR |
-| start_date | DATETIME |
-| due_date | DATETIME |
-| completed_at | DATETIME |
-| reminder_time | DATETIME |
-| notes | TEXT |
-| is_recurring | BOOLEAN |
-| recurring_rule | TEXT |
-| is_archived | BOOLEAN |
-| deleted_at | DATETIME |
-| created_at | DATETIME |
-| updated_at | DATETIME |
-
----
-
-# 🏷 tasks_label
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| workspace | FK |
-| name | VARCHAR |
-| color | VARCHAR |
-
----
-
-# 💬 tasks_comment
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| task | FK |
-| user | FK |
-| content | TEXT |
-| created_at | DATETIME |
-
----
-
-# 📝 tasks_note
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| task | FK |
-| user | FK |
-| content | TEXT |
-| created_at | DATETIME |
-
----
-
-# ☑ tasks_checklistitem
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| task | FK |
-| title | VARCHAR |
-| is_completed | BOOLEAN |
-| completed_at | DATETIME |
-| created_at | DATETIME |
-
----
-
-# 📎 tasks_attachment
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| task | FK |
-| uploaded_by | FK |
-| file | FILE |
-| created_at | DATETIME |
-
----
-
-# 🔔 notifications_notification
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| user | FK |
-| type | VARCHAR |
-| title | VARCHAR |
-| message | TEXT |
-| is_read | BOOLEAN |
-| related_task | FK |
-| created_at | DATETIME |
-
----
-
-# ⚙️ Setup
-
-## 1️⃣ Create Virtual Environment
-
-```powershell
-python -m venv venv
-```
-
----
-
-## 2️⃣ Activate Environment
-
-```powershell
-.\venv\Scripts\Activate.ps1
-```
-
----
-
-## 3️⃣ Install Requirements
-
-```powershell
-pip install -r requirements.txt
-```
-
----
-
-## 4️⃣ Configure Environment Variables
-
-Copy:
-
-```powershell
-copy .env.example .env
-```
-
-Update `.env`:
-
-```env
-SECRET_KEY=your_secret_key
-
-DEBUG=True
-
-DB_NAME=postgres
-DB_USER=postgres.xxxxxxxxx
-DB_PASSWORD=your_password
-DB_HOST=xxxx.com
-DB_PORT=5432
-
-EMAIL_HOST=
-EMAIL_PORT=
-EMAIL_HOST_USER=
-EMAIL_HOST_PASSWORD=
-EMAIL_USE_TLS=True
-```
-
----
-
-# 🚀 Run Project
-
-## Apply Migrations
-
-```powershell
-python manage.py makemigrations
-python manage.py migrate
-```
-
----
-
-## Create Admin User
-
-```powershell
-python manage.py createsuperuser
-```
-
----
-
-## Run Server
-
-```powershell
-python manage.py runserver
-```
-
----
-
-# 🌐 Base URL
-
-```text
-http://127.0.0.1:8000
-```
-
----
-
-# 🔐 Authentication Header
-
-```text
-Authorization: Bearer YOUR_ACCESS_TOKEN
-Content-Type: application/json
-```
-
----
-
-# 📡 API Endpoints
-
-# 🔐 Authentication APIs
-
-| Method | Endpoint |
-|---|---|
-| POST | `/api/auth/register/` |
-| POST | `/api/auth/login/` |
-| POST | `/api/auth/refresh/` |
-| POST | `/api/auth/logout/` |
-| POST | `/api/auth/verify-email/` |
-| POST | `/api/auth/resend-verification/` |
-| POST | `/api/auth/forgot-password/` |
-| POST | `/api/auth/reset-password/` |
-| POST | `/api/auth/change-password/` |
-| GET/PATCH | `/api/auth/profile/` |
-
----
-
-# 🏢 Workspace APIs
-
-| Method | Endpoint |
-|---|---|
-| GET/POST | `/api/workspaces/` |
-| GET/PATCH/DELETE | `/api/workspaces/{id}/` |
-| GET/POST | `/api/workspaces/members/` |
-
----
-
-# ✅ Task APIs
-
-| Method | Endpoint |
-|---|---|
-| GET/POST | `/api/tasks/` |
-| GET/PATCH/DELETE | `/api/tasks/{id}/` |
-| GET/POST | `/api/tasks/comments/` |
-| GET/POST | `/api/tasks/checklists/` |
-| GET/POST | `/api/tasks/notes/` |
-| GET/POST | `/api/tasks/attachments/` |
-| GET/POST | `/api/tasks/labels/` |
-
----
-
-# 🔔 Notification APIs
-
-| Method | Endpoint |
-|---|---|
-| GET | `/api/notifications/` |
-| GET | `/api/notifications/unread-count/` |
-| POST | `/api/notifications/{id}/mark-read/` |
-| POST | `/api/notifications/mark-all-read/` |
-
----
-
-# 🔍 Filtering Examples
-
-```text
-/api/tasks/?status=todo
-
-/api/tasks/?priority=high
-
-/api/tasks/?search=sprint
-
-/api/tasks/?ordering=-due_date
-
-/api/workspaces/?search=main
-```
-
----
-
-# 🧪 Postman Testing Flow
-
-## 1️⃣ Register
-
-```http
-POST /api/auth/register/
-```
-
-```json
-{
-  "username": "postmanuser",
-  "email": "postmanuser@example.com",
-  "full_name": "Postman User",
-  "phone": "9876543210",
-  "password": "StrongPass123!"
-}
-```
-
----
-
-## 2️⃣ Verify Email
-
-```http
-POST /api/auth/verify-email/
-```
-
-```json
-{
-  "email": "postmanuser@example.com",
-  "otp": "123456"
-}
-```
-
----
-
-## 3️⃣ Login
-
-```http
-POST /api/auth/login/
-```
-
-```json
-{
-  "email": "postmanuser@example.com",
-  "password": "StrongPass123!"
-}
-```
-
-Copy:
-
-- access token
-- refresh token
-
----
-
-## 4️⃣ Create Workspace
-
-```http
-POST /api/workspaces/
-```
-
-```json
-{
-  "name": "Main Workspace",
-  "description": "Testing workspace",
-  "color": "#2563eb"
-}
-```
-
----
-
-## 5️⃣ Create Task
-
-```http
-POST /api/tasks/
-```
-
-```json
-{
-  "workspace": "workspace_uuid",
-  "title": "Prepare sprint board",
-  "description": "Create initial task list",
-  "status": "todo",
-  "priority": "high",
-  "due_date": "2026-05-25T10:00:00Z"
-}
-```
-
----
-
-# 🛠 Admin Panel
-
-```text
-http://127.0.0.1:8000/admin/
-```
-
----
-
-# 🚨 Troubleshooting
-
-## 401 Unauthorized
-
-- Access token missing
-- Access token expired
-
-Solution:
-
-```text
-Login again and paste new access token
-```
-
----
-
-## OTP Not Received
-
-If SMTP is not configured:
-
-```text
-OTP appears in Django terminal
-```
-
----
-
-## Supabase Migration Error
-
-If using old DB before custom user model:
-
-```text
-Use fresh dev database or reset schema
-```
-
----
-
-# 📦 Tech Stack
-
-- Django
-- Django REST Framework
-- PostgreSQL
-- Supabase
-- JWT
-- SimpleJWT
-- Python Dotenv
-- psycopg2
-- DRF Filters
-
----
-
-# 👨‍💻 Author
-
-Hitesh Kumar S# 🚀 Task Manager Backend
-
-A production-ready **Django REST Framework backend** for a modern **Task Manager SaaS application** using:
-
-- 🐍 Django + DRF
-- 🐘 Supabase PostgreSQL
-- 🔐 JWT Authentication
-- 📧 OTP Email Verification
-- 🏢 Workspaces
-- ✅ Tasks & Checklists
-- 🔔 Notifications
-- 📎 Attachments
-- 📝 Notes & Comments
-- 🔍 Filtering/Search/Ordering
-- 📄 Pagination
-- 🛠 Django Admin
-
----
-
-# ✨ Features
-
-## 🔐 Authentication System
+# 🔐 Authentication Features
 
 - ✅ User Registration
-- ✅ Email OTP Verification
-- ✅ JWT Login
-- ✅ Access & Refresh Tokens
-- ✅ Password Reset
+- ✅ JWT Authentication
+- ✅ Access Token & Refresh Token
+- ✅ OTP Email Verification
+- ✅ Forgot Password
+- ✅ Reset Password
 - ✅ Change Password
-- ✅ Logout
 - ✅ Protected APIs
-- ✅ User Profiles
-- ✅ Token Blacklisting
+- ✅ Role-Based Authentication
+- ✅ Google Sign-In UI
+- ✅ GitHub Sign-In UI
 
 ---
 
-## 🏢 Workspace System
+# 🏢 Workspace Features
 
 - ✅ Create Workspace
-- ✅ Invite Members
-- ✅ Member Roles
+- ✅ Update Workspace
+- ✅ Delete Workspace
 - ✅ Archive Workspace
-- ✅ Workspace Permissions
-- ✅ Search & Filters
+- ✅ Invite Members
+- ✅ Workspace Roles
+- ✅ Workspace Collaboration
+- ✅ Workspace Filters & Search
 
 ---
 
-## ✅ Task Management
+# ✅ Task Features
 
-- ✅ Create Tasks
-- ✅ Assign Tasks
-- ✅ Task Priorities
-- ✅ Task Status Tracking
+- ✅ Create Task
+- ✅ Update Task
+- ✅ Delete Task
+- ✅ Archive Task
+- ✅ Restore Task
+- ✅ Assign Task
 - ✅ Due Dates & Reminders
-- ✅ Recurring Tasks
+- ✅ Task Priority System
+- ✅ Task Status Tracking
+- ✅ Checklist Items
 - ✅ Task Notes
 - ✅ Task Comments
-- ✅ Checklist Items
-- ✅ Attachments
-- ✅ Archive/Restore Tasks
+- ✅ File Attachments
+- ✅ Recurring Tasks
 
 ---
 
-## 🔔 Notifications
+# 🔔 Notification Features
 
-- ✅ Task Assigned
+- ✅ Real-Time Notifications
+- ✅ Task Assignment Alerts
 - ✅ Comment Notifications
 - ✅ Reminder Notifications
+- ✅ Unread Notification Count
 - ✅ Mark Read / Unread
-- ✅ Unread Count
 
 ---
 
-# 🏗 System Architecture
+# 🎨 Frontend Features
 
-```text
-Task Manager Backend
-│
-├── accounts
-│   ├── authentication
-│   ├── OTP verification
-│   ├── JWT tokens
-│   └── profile management
-│
-├── workspaces
-│   ├── workspace CRUD
-│   ├── member management
-│   └── permissions
-│
-├── tasks
-│   ├── task CRUD
-│   ├── comments
-│   ├── checklists
-│   ├── notes
-│   ├── labels
-│   └── attachments
-│
-├── notifications
-│   ├── alerts
-│   ├── unread tracking
-│   └── reminder system
-│
-└── config
-    ├── settings
-    ├── JWT
-    ├── DRF
-    └── Supabase PostgreSQL
-```
+- ✅ Modern UI/UX
+- ✅ Tailwind CSS Design
+- ✅ Responsive Layout
+- ✅ Animated Components
+- ✅ Glassmorphism Effects
+- ✅ Sidebar Navigation
+- ✅ Protected Routes
+- ✅ Interactive Dashboard
+- ✅ Admin Dashboard
+- ✅ Loading Skeletons
+- ✅ Toast Messages
+- ✅ Form Validation
+
+---
+
+# 👨‍💼 Admin Dashboard
+
+- ✅ Admin Login
+- ✅ User Management
+- ✅ Workspace Management
+- ✅ Task Management
+- ✅ Notifications Monitoring
+- ✅ Analytics Dashboard
+- ✅ System Monitoring
 
 ---
 
 # 🗄 Database Structure
+
+---
 
 # 👤 accounts_user
 
@@ -808,30 +245,7 @@ Task Manager Backend
 
 ---
 
-# 🏷 tasks_label
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| workspace | FK |
-| name | VARCHAR |
-| color | VARCHAR |
-
----
-
 # 💬 tasks_comment
-
-| Column | Type |
-|---|---|
-| id | UUID |
-| task | FK |
-| user | FK |
-| content | TEXT |
-| created_at | DATETIME |
-
----
-
-# 📝 tasks_note
 
 | Column | Type |
 |---|---|
@@ -883,9 +297,17 @@ Task Manager Backend
 
 ---
 
-# ⚙️ Setup
+# ⚙️ Backend Setup
 
-## 1️⃣ Create Virtual Environment
+## 1️⃣ Navigate To Backend
+
+```powershell
+cd backend
+```
+
+---
+
+## 2️⃣ Create Virtual Environment
 
 ```powershell
 python -m venv venv
@@ -893,7 +315,7 @@ python -m venv venv
 
 ---
 
-## 2️⃣ Activate Environment
+## 3️⃣ Activate Virtual Environment
 
 ```powershell
 .\venv\Scripts\Activate.ps1
@@ -901,7 +323,7 @@ python -m venv venv
 
 ---
 
-## 3️⃣ Install Requirements
+## 4️⃣ Install Dependencies
 
 ```powershell
 pip install -r requirements.txt
@@ -909,15 +331,9 @@ pip install -r requirements.txt
 
 ---
 
-## 4️⃣ Configure Environment Variables
+## 5️⃣ Configure Environment Variables
 
-Copy:
-
-```powershell
-copy .env.example .env
-```
-
-Update `.env`:
+Create `.env`
 
 ```env
 SECRET_KEY=your_secret_key
@@ -927,7 +343,7 @@ DEBUG=True
 DB_NAME=postgres
 DB_USER=postgres.xxxxxxxxx
 DB_PASSWORD=your_password
-DB_HOST=xxxx.com
+DB_HOST=xxxx.supabase.co
 DB_PORT=5432
 
 EMAIL_HOST=
@@ -939,7 +355,7 @@ EMAIL_USE_TLS=True
 
 ---
 
-# 🚀 Run Project
+# 🚀 Run Backend
 
 ## Apply Migrations
 
@@ -950,7 +366,7 @@ python manage.py migrate
 
 ---
 
-## Create Admin User
+## Create Superuser
 
 ```powershell
 python manage.py createsuperuser
@@ -958,18 +374,58 @@ python manage.py createsuperuser
 
 ---
 
-## Run Server
+## Run Backend Server
 
 ```powershell
 python manage.py runserver
 ```
 
----
-
-# 🌐 Base URL
+Backend runs at:
 
 ```text
 http://127.0.0.1:8000
+```
+
+---
+
+# 🎨 Frontend Setup
+
+## 1️⃣ Navigate To Frontend
+
+```powershell
+cd frontend
+```
+
+---
+
+## 2️⃣ Install Dependencies
+
+```powershell
+npm install
+```
+
+---
+
+## 3️⃣ Configure Frontend Environment
+
+Create `.env.local`
+
+```env
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+```
+
+---
+
+## 4️⃣ Run Frontend
+
+```powershell
+npm run dev
+```
+
+Frontend runs at:
+
+```text
+http://localhost:3000
 ```
 
 ---
@@ -994,7 +450,6 @@ Content-Type: application/json
 | POST | `/api/auth/refresh/` |
 | POST | `/api/auth/logout/` |
 | POST | `/api/auth/verify-email/` |
-| POST | `/api/auth/resend-verification/` |
 | POST | `/api/auth/forgot-password/` |
 | POST | `/api/auth/reset-password/` |
 | POST | `/api/auth/change-password/` |
@@ -1037,25 +492,9 @@ Content-Type: application/json
 
 ---
 
-# 🔍 Filtering Examples
-
-```text
-/api/tasks/?status=todo
-
-/api/tasks/?priority=high
-
-/api/tasks/?search=sprint
-
-/api/tasks/?ordering=-due_date
-
-/api/workspaces/?search=main
-```
-
----
-
 # 🧪 Postman Testing Flow
 
-## 1️⃣ Register
+## 🔹 Register
 
 ```http
 POST /api/auth/register/
@@ -1073,7 +512,7 @@ POST /api/auth/register/
 
 ---
 
-## 2️⃣ Verify Email
+## 🔹 Verify Email
 
 ```http
 POST /api/auth/verify-email/
@@ -1088,7 +527,7 @@ POST /api/auth/verify-email/
 
 ---
 
-## 3️⃣ Login
+## 🔹 Login
 
 ```http
 POST /api/auth/login/
@@ -1101,52 +540,22 @@ POST /api/auth/login/
 }
 ```
 
-Copy:
-
-- access token
-- refresh token
-
----
-
-## 4️⃣ Create Workspace
-
-```http
-POST /api/workspaces/
-```
-
-```json
-{
-  "name": "Main Workspace",
-  "description": "Testing workspace",
-  "color": "#2563eb"
-}
-```
-
----
-
-## 5️⃣ Create Task
-
-```http
-POST /api/tasks/
-```
-
-```json
-{
-  "workspace": "workspace_uuid",
-  "title": "Prepare sprint board",
-  "description": "Create initial task list",
-  "status": "todo",
-  "priority": "high",
-  "due_date": "2026-05-25T10:00:00Z"
-}
-```
-
 ---
 
 # 🛠 Admin Panel
 
+## Backend Admin
+
 ```text
 http://127.0.0.1:8000/admin/
+```
+
+---
+
+## Frontend Admin
+
+```text
+http://localhost:3000/admin/login
 ```
 
 ---
@@ -1155,50 +564,61 @@ http://127.0.0.1:8000/admin/
 
 ## 401 Unauthorized
 
-- Access token missing
-- Access token expired
-
-Solution:
-
 ```text
-Login again and paste new access token
+Access token missing or expired.
+Login again with valid credentials.
 ```
 
 ---
 
 ## OTP Not Received
 
-If SMTP is not configured:
-
 ```text
-OTP appears in Django terminal
+If SMTP is not configured,
+OTP will appear in Django terminal.
 ```
 
 ---
 
 ## Supabase Migration Error
 
-If using old DB before custom user model:
-
 ```text
-Use fresh dev database or reset schema
+Use fresh database or reset schema.
 ```
 
 ---
 
-# 📦 Tech Stack
+# 📦 Installation Commands
 
-- Django
-- Django REST Framework
-- PostgreSQL
-- Supabase
-- JWT
-- SimpleJWT
-- Python Dotenv
-- psycopg2
-- DRF Filters
+## Backend
+
+```powershell
+cd backend
+.\venv\Scripts\Activate.ps1
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+---
+
+## Frontend
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
 ---
 
 # 👨‍💻 Author
 
+## Hitesh Kumar S
+
+- Full Stack Developer
+- Django REST Framework Developer
+- Next.js Frontend Developer
+- PostgreSQL & Supabase Integration
+- JWT Authentication Systems
+- Modern SaaS Application Development
