@@ -17,6 +17,39 @@ A production-ready **Django REST Framework backend** for a modern **Task Manager
 
 ---
 
+This project includes:
+
+## 🖥 Backend
+
+Production-ready Django REST Framework backend with:
+
+- JWT Authentication
+- OTP Verification
+- Workspaces
+- Task Management
+- Notifications
+- Admin APIs
+- Supabase PostgreSQL Integration
+
+---
+
+## 🎨 Frontend
+
+A modern Next.js frontend featuring:
+
+- ✨ Futuristic UI
+- 🎭 3D animations
+- 🌈 Glassmorphism effects
+- ⚡ Lightning-fast pages
+- 📱 Responsive design
+- 🌙 Dark/Light Mode
+- 🔐 Authentication pages
+- 🧑‍💼 Admin Dashboard
+- 📊 Analytics
+- 🔔 Real-time notifications
+- 📅 Interactive task boards
+
+---
 # ✨ Features
 
 ## 🔐 Authentication System

@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, status
+from rest_framework import decorators, generics, permissions, response, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -16,6 +16,43 @@ from .serializers import (
     UserSerializer,
     VerifyEmailSerializer,
 )
+from .permissions import IsAdminOnly
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminOnly]
+    filterset_fields = ('role', 'is_active', 'is_verified')
+    search_fields = ('email', 'username', 'full_name')
+    ordering_fields = ('created_at',)
+    queryset = User.objects.all()
+
+    @decorators.action(detail=True, methods=['post'])
+    def block(self, request, pk=None):
+        user = self.get_object()
+        user.is_active = False
+        user.save(update_fields=['is_active'])
+        return response.Response(self.get_serializer(user).data)
+
+    @decorators.action(detail=True, methods=['post'])
+    def unblock(self, request, pk=None):
+        user = self.get_object()
+        user.is_active = True
+        user.save(update_fields=['is_active'])
+        return response.Response(self.get_serializer(user).data)
+
+    @decorators.action(detail=True, methods=['post'])
+    def set_role(self, request, pk=None):
+        user = self.get_object()
+        role = request.data.get('role')
+        if role not in [choice[0] for choice in User.Role.choices]:
+            return response.Response({'detail': 'Invalid role.'}, status=400)
+        user.role = role
+        user.save(update_fields=['role'])
+        return response.Response(self.get_serializer(user).data)
 
 
 class RegisterView(generics.CreateAPIView):
