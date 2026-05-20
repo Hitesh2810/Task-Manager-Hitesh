@@ -10,10 +10,12 @@ import { SocialButtons } from "@/components/auth/social-buttons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/store/authStore";
+import { usePublicRoute } from "@/hooks/usePublicRoute";
 
 export default function LoginPage() {
   const router = useRouter();
   const { login, loading } = useAuthStore();
+  const { ready } = usePublicRoute();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   async function onSubmit(values) {
@@ -25,6 +27,10 @@ export default function LoginPage() {
       const message = err?.response?.data?.detail || err?.message || "Invalid credentials";
       toast.error(String(message));
     }
+  }
+
+  if (!ready) {
+    return null;
   }
 
   return (

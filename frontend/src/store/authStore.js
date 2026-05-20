@@ -20,13 +20,14 @@ export const useAuthStore = create(
       setHydrated: () => set({ hydrated: true }),
       setTokens: (accessToken, refreshToken) => {
         setCookie("tm_access", accessToken);
+        setCookie("tm_refresh", refreshToken);
         set({ accessToken, refreshToken });
       },
       login: async (payload) => {
         set({ loading: true });
         const { data } = await authService.login(payload);
-        setCookie("tm_access", data.access);
-        set({ user: data.user, accessToken: data.access, refreshToken: data.refresh, loading: false });
+        get().setTokens(data.access, data.refresh);
+        set({ user: data.user, loading: false });
         return data;
       },
       register: async (payload) => {
@@ -52,6 +53,7 @@ export const useAuthStore = create(
           if (refresh) await authService.logout(refresh);
         } catch {}
         setCookie("tm_access", "");
+        setCookie("tm_refresh", "");
         set({ user: null, accessToken: null, refreshToken: null, loading: false });
       },
     }),

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AppShell } from "@/components/layout/app-shell";
+import { AdminShell } from "@/components/admin/admin-shell";
 import { useAdminStore } from "@/store/adminStore";
 import { useRouter } from "next/navigation";
 import { userService } from "@/services/userService";
@@ -54,7 +54,7 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <AppShell title="Users" subtitle="Manage registered users.">
+    <AdminShell title="Users" subtitle="Manage registered users.">
       <div className="space-y-4">
         <div className="glass-panel rounded-2xl p-4">
           <h3 className="font-semibold">Users</h3>
@@ -91,6 +91,6 @@ export default function AdminUsersPage() {
           </div>
         </div>
       </div>
-    </AppShell>
+    </AdminShell>
   );
 }

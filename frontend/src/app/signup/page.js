@@ -9,16 +9,22 @@ import { SocialButtons } from "@/components/auth/social-buttons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuthStore } from "@/store/authStore";
+import { usePublicRoute } from "@/hooks/usePublicRoute";
 
 export default function SignupPage() {
   const router = useRouter();
   const { register: registerUser, loading } = useAuthStore();
+  const { ready } = usePublicRoute();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   async function onSubmit(values) {
     await registerUser(values);
     toast.success("Account created. Check the terminal or email for OTP.");
     router.push(`/verify-email?email=${encodeURIComponent(values.email)}`);
+  }
+
+  if (!ready) {
+    return null;
   }
 
   return (

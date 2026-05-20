@@ -1,7 +1,7 @@
 "use client";
 
 import { Activity, Bell, ShieldCheck, UsersRound } from "lucide-react";
-import { AppShell } from "@/components/layout/app-shell";
+import { AdminShell } from "@/components/admin/admin-shell";
 import { AdminMetric } from "@/components/admin/admin-metric";
 import { AdminTable } from "@/components/admin/admin-table";
 import { ProductivityChart } from "@/components/dashboard/analytics-chart";
@@ -20,17 +20,24 @@ export default function AdminPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (hydrated && !user) router.push("/admin/login");
+    if (hydrated && !user) {
+      router.push("/admin/login");
+    }
+    if (hydrated && user && user.role !== "admin") {
+      router.push("/dashboard");
+    }
   }, [hydrated, user, router]);
 
   useEffect(() => {
-    fetchTasks().catch(() => {});
-    fetchWorkspaces().catch(() => {});
-    fetchNotifications().catch(() => {});
-  }, [fetchTasks, fetchWorkspaces, fetchNotifications]);
+    if (user?.role === "admin") {
+      fetchTasks().catch(() => {});
+      fetchWorkspaces().catch(() => {});
+      fetchNotifications().catch(() => {});
+    }
+  }, [user, fetchTasks, fetchWorkspaces, fetchNotifications]);
 
   return (
-    <AppShell title="Admin Control" subtitle="Enterprise-grade operational overview for users, tasks, workspaces, notifications, and activity.">
+    <AdminShell title="Admin Control" subtitle="Enterprise-grade operational overview for users, tasks, workspaces, notifications, and activity.">
       <div className="space-y-5">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <AdminMetric label="Task inventory" value={tasks.length} detail="All accessible task records" icon={Activity} />
@@ -49,6 +56,6 @@ export default function AdminPage() {
           </p>
         </div>
       </div>
-    </AppShell>
+    </AdminShell>
   );
 }
